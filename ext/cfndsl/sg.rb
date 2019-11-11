@@ -5,6 +5,8 @@ def generate_security_group_rules(security_group_rules,ip_blocks={})
     
     if rule.has_key?('ip_blocks')
       rule['ip_blocks'].each { |block| (ips.concat(ip_blocks[block])).uniq }
+    elsif rule.has_key('ip_lists')
+      rule['ip_list'].each { |ip| ips.push(ip) }
     elsif rule.has_key?('ip')
       ips.push(rule['ip'])  
     end
